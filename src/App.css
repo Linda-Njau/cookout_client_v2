@@ -1,0 +1,21 @@
+
+.navbar {
+  position: sticky;
+  height: 60px;
+  top: 0;
+  justify-items: baseline;
+  align-items: center;
+}
+
+.navar__logo {
+  padding: 0.5 rem 1 rem;
+  margin: 0 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 100px;
+  box-sizing: border-box;
+}
+
+.navbar__logo img:hover {
+  transform: scale(1.1);
+}

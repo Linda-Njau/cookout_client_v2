@@ -1,0 +1,14 @@
+.recipe-page {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.recipe-list {
+    flex: 1;
+}
+
+.recipe-form {
+    flex: 1;
+    margin-left: 20px;
+}

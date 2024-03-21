@@ -1,0 +1,97 @@
+import { useState } from 'react';
+import './RecipeForm.css';
+import { postData } from './httpService';
+
+const RecipeForm = () => {
+
+    const [formData, setFormData] = useState({
+        title: '',
+        ingredients: '',
+        instructions: '',
+        preparationTime: '',
+        cookingTime: '',
+        calories: '',
+        servings: '',
+        tags: '',
+        date: '',
+        hidden: false 
+
+    });
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            const data = await postData('/recipes',formData);
+            console.log(data);
+            setFormData({
+                title: '',
+                ingredients: '',
+                instructions: '',
+                preparationTime: '',
+                cookingTime: '',
+                calories: '',
+                servings: '',
+                tags: '',
+                date: '',
+                hidden: false,
+            });
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        console.log('Name:', name);
+        console.log('Value:', value)
+        setFormData(prevState => ({
+            ...prevState,
+            [name]: value
+        }));
+    };
+    return (
+        <div className="recipe-page">
+            <div className="recipe-list"> 
+
+            </div>
+            <div className ="recipe-form">
+                <h2>Create New Recipe</h2>
+                <form onSubmit={handleSubmit}>
+                <label>Title:</label>
+                    <input type="text" name="title" value={formData.title} onChange={handleChange} />
+                    
+                    <label>Ingredients:</label>
+                    <textarea name="ingredients" value={formData.ingredients} onChange={handleChange} />
+                    
+                    <label>Instructions:</label>
+                    <textarea name="instructions" value={formData.instructions} onChange={handleChange} />
+                    
+                    <label>Preparation Time (mins):</label>
+                    <input type="number" name="preparationTime" value={formData.preparationTime} onChange={handleChange} />
+                    
+                    <label>Cooking Time (mins):</label>
+                    <input type="number" name="cookingTime" value={formData.cookingTime} onChange={handleChange} />
+                    
+                    <label>Calories:</label>
+                    <input type="number" name="calories" value={formData.calories} onChange={handleChange} />
+                    
+                    <label>Servings:</label>
+                    <input type="number" name="servings" value={formData.servings} onChange={handleChange} />
+                    
+                    <label>Tags:</label>
+                    <input type="text" name="tags" value={formData.tags} onChange={handleChange} />
+                    
+                    <label>Date:</label>
+                    <input type="date" name="date" value={formData.date} onChange={handleChange} />
+                    
+                    <label>Hidden:</label>
+                    <input type="checkbox" name="hidden" checked={formData.hidden} onChange={() => setFormData(prevState => ({ ...prevState, hidden: !formData.hidden }))} />
+                    <button type="submit">Create Recipe</button>
+                </form>
+            </div>
+        </div>
+    );
+};
+
+export default RecipeForm
+
