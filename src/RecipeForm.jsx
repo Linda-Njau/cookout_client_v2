@@ -2,8 +2,8 @@ import { useState } from 'react';
 import './RecipeForm.css';
 import { postData } from './httpService';
 
-const RecipeForm = () => {
 
+const RecipeForm = () => { 
     const [formData, setFormData] = useState({
         title: '',
         ingredients: '',
@@ -24,6 +24,7 @@ const RecipeForm = () => {
             const data = await postData('/recipes',formData);
             console.log(data);
             setFormData({
+                ...formData,
                 title: '',
                 ingredients: '',
                 instructions: '',
@@ -52,7 +53,6 @@ const RecipeForm = () => {
     return (
         <div className="recipe-page">
             <div className="recipe-list"> 
-
             </div>
             <div className ="recipe-form">
                 <h2>Create New Recipe</h2>
