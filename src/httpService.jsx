@@ -24,3 +24,12 @@ export const fetchRecipes = async (user_id) => {
         throw new Error("failed to fetch recipes", err);
     }
 }
+
+export const fetchRecipesbyTags = async (tags) => {
+    try {
+        const response = await httpClient.get(`/recipes?tags=${tags}`);
+        return response.data;
+    } catch (err) {
+        throw new Error('Failed to search recipes', err);
+    }
+};
