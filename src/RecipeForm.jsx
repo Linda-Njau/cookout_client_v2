@@ -1,30 +1,31 @@
 import { useState } from 'react';
 import './RecipeForm.css';
-import { postData } from './httpService';
+import { postData, putData } from './httpService';
 
 
-const RecipeForm = () => { 
+const RecipeForm = (recipe, setEditRecipe) => { 
     const [formData, setFormData] = useState({
-        title: '',
-        ingredients: '',
-        instructions: '',
-        preparationTime: '',
-        cookingTime: '',
-        calories: '',
-        servings: '',
-        tags: '',
-        date: '',
-        hidden: false 
+        title: recipe ? recipe.title : '',
+        ingredients: recipe ? recipe.ingredients : '',
+        instructions: recipe ? recipe.instructions : '',
+        preparationTime: recipe ? recipe.preparation_time : '',
+        cookingTime: recipe ? recipe.cooking_time : '',
+        calories: recipe ? recipe.calories : '',
+        servings: recipe ? recipe.servings : '',
+        tags: recipe ? recipe.tags.join(', ') : '',
+        date: recipe ? recipe.title : '',
+        hidden: recipe ? !recipe.hidden : false
 
     });
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const data = await postData('/recipes',formData);
+            const data = recipe ? await putData(`/recipes/${recipe.id}`, formData) :
+                        await postData('/recipes',formData);
             console.log(data);
+            setEditRecipe(null);
             setFormData({
-                ...formData,
                 title: '',
                 ingredients: '',
                 instructions: '',
@@ -55,7 +56,7 @@ const RecipeForm = () => {
             <div className="recipe-list"> 
             </div>
             <div className ="recipe-form">
-                <h2>Create New Recipe</h2>
+                <h2>{recipe ? 'Edit Recipe' : 'Create New Recipe'}</h2>
                 <form onSubmit={handleSubmit}>
                 <label>Title:</label>
                     <input type="text" name="title" value={formData.title} onChange={handleChange} />
@@ -86,8 +87,9 @@ const RecipeForm = () => {
                     
                     <label>Hidden:</label>
                     <input type="checkbox" name="hidden" checked={formData.hidden} onChange={() => setFormData(prevState => ({ ...prevState, hidden: !formData.hidden }))} />
-                    <button type="submit">Create Recipe</button>
+                    <button type="submit">{recipe ? 'Update Recipe' : 'Create Recipe'}</button>
                 </form>
+                <button onClick={() => setEditRecipe(null)}>Cancel</button>
             </div>
         </div>
     );
