@@ -33,3 +33,12 @@ export const fetchRecipesbyTags = async (tags) => {
         throw new Error('Failed to search recipes', err);
     }
 };
+
+export const putData = async (data, recipe_id) => {
+    try{
+        const response = await httpClient.put(`/recipes/${recipe_id}`, data);
+        return response.data;
+    } catch(err) {
+        throw new Error('failed to edit recipe',err);
+    }
+}

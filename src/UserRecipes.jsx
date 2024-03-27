@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react';
 import { fetchRecipes } from './httpService';
+import RecipeForm from './RecipeForm';
 
 const UserRecipes = () => {
     const [recipes, setRecipes ] = useState([]);
+    const [editRecipe, setEditRecipe] = useState(null);
 
 useEffect(() => {
     const fetchUserRecipes = async () => {
@@ -16,6 +18,10 @@ useEffect(() => {
     };
     fetchUserRecipes();
 }, []);
+
+    const handleEditRecipe = (recipe) => {
+        setEditRecipe(recipe);
+    };
 
 return (
     <div>
@@ -31,10 +37,12 @@ return (
                     <p>Calories: {recipe.calories}</p>
                     <p>Servings: {recipe.servings}</p>
                     <p>tags: {recipe.tags}</p>
-                    
+                    <button onClick={() => handleEditRecipe(recipe)}>Edit</button>
                 </div>
             ))}
         </div>
+        {!editRecipe && <RecipeForm />}
+        {editRecipe && <RecipeForm recipe={editRecipe} />}
     </div>
 );
 };

@@ -1,5 +1,4 @@
 import './App.css';
-import RecipeForm from './RecipeForm';
 import UserRecipes from './UserRecipes';
 import SearchRecipes from './SearchRecipes';
 
@@ -11,7 +10,6 @@ function App() {
     <nav className="navbar">
         <div className="navbar__logo"></div>
     </nav>
-      <div><RecipeForm /></div>
       <div><UserRecipes /></div>
       <div><SearchRecipes /></div>
    </div>

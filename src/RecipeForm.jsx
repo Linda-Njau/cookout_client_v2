@@ -3,7 +3,7 @@ import './RecipeForm.css';
 import { postData, putData } from './httpService';
 
 
-const RecipeForm = (recipe, setEditRecipe) => { 
+const RecipeForm = ({recipe, setEditRecipe}) => { 
     const [formData, setFormData] = useState({
         title: recipe ? recipe.title : '',
         ingredients: recipe ? recipe.ingredients : '',
@@ -12,8 +12,7 @@ const RecipeForm = (recipe, setEditRecipe) => {
         cookingTime: recipe ? recipe.cooking_time : '',
         calories: recipe ? recipe.calories : '',
         servings: recipe ? recipe.servings : '',
-        tags: recipe ? recipe.tags.join(', ') : '',
-        date: recipe ? recipe.title : '',
+        tags: recipe && Array.isArray(recipe.tags) ? recipe.tags.join(', ') : '',
         hidden: recipe ? !recipe.hidden : false
 
     });
@@ -21,7 +20,7 @@ const RecipeForm = (recipe, setEditRecipe) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const data = recipe ? await putData(`/recipes/${recipe.id}`, formData) :
+            const data = recipe ? await putData(formData, recipe.id) :
                         await postData('/recipes',formData);
             console.log(data);
             setEditRecipe(null);
@@ -89,7 +88,7 @@ const RecipeForm = (recipe, setEditRecipe) => {
                     <input type="checkbox" name="hidden" checked={formData.hidden} onChange={() => setFormData(prevState => ({ ...prevState, hidden: !formData.hidden }))} />
                     <button type="submit">{recipe ? 'Update Recipe' : 'Create Recipe'}</button>
                 </form>
-                <button onClick={() => setEditRecipe(null)}>Cancel</button>
+                {recipe && <button onClick={() => setEditRecipe(null)}>Cancel</button>}
             </div>
         </div>
     );
