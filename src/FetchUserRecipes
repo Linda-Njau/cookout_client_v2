@@ -1,0 +1,19 @@
+import { useEffect } from 'react';
+import { fetchRecipes } from './httpService';
+
+const FetchUserRecipes = ({ setRecipes }) => {
+    useEffect(() => {
+        const fetchUserRecipes = async () => {
+            try {
+                const user_id = 1;
+                const recipesData = await fetchRecipes(user_id);
+                setRecipes(recipesData)
+            } catch (err) {
+                console.error('Error fetching recips', err);
+            }
+        };
+        fetchUserRecipes()
+    }, [setRecipes]);
+}
+
+export default FetchUserRecipes;
