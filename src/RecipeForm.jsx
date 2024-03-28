@@ -3,7 +3,7 @@ import './RecipeForm.css';
 import { postData, putData } from './httpService';
 
 
-const RecipeForm = ({recipe, setEditRecipe}) => { 
+const RecipeForm = ({recipe, setEditRecipe, onSuccess }) => { 
     const [formData, setFormData] = useState({
         title: recipe ? recipe.title : '',
         ingredients: recipe ? recipe.ingredients : '',
@@ -36,6 +36,7 @@ const RecipeForm = ({recipe, setEditRecipe}) => {
                 date: '',
                 hidden: false,
             });
+            onSuccess();
         } catch (error) {
             console.error(error);
         }

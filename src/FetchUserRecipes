@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { fetchRecipes } from './httpService';
 
-const FetchUserRecipes = ({ setRecipes }) => {
+const FetchUserRecipes = ({ setRecipes, onSuccess }) => {
     useEffect(() => {
         const fetchUserRecipes = async () => {
             try {
@@ -13,7 +13,7 @@ const FetchUserRecipes = ({ setRecipes }) => {
             }
         };
         fetchUserRecipes()
-    }, [setRecipes]);
+    }, [setRecipes, onSuccess]);
 }
 
 export default FetchUserRecipes;

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import RecipeForm from './RecipeForm';
 import FetchUserRecipes from './FetchUserRecipes';
 
@@ -11,10 +11,14 @@ const UserRecipes = () => {
         setEditRecipe(recipe);
     };
 
+    const handleEditSuccess = () => {
+        setEditRecipe(null);
+    }
+
 return (
     <div>
         <h2>User Recipes</h2>
-        <FetchUserRecipes setRecipes={setRecipes} />
+        <FetchUserRecipes setRecipes={setRecipes} onSuccess={handleEditSuccess} />
         <div className="recipe-list">
             {recipes.map(recipe => (
                 <div key={recipe.id} className="recipe">
@@ -30,8 +34,8 @@ return (
                 </div>
             ))}
         </div>
-        {!editRecipe && <RecipeForm />}
-        {editRecipe && <RecipeForm recipe={editRecipe} />}
+        {!editRecipe && <RecipeForm onSuccess={handleEditSuccess}/>}
+        {editRecipe && <RecipeForm recipe={editRecipe} setEditRecipe={setEditRecipe} onSuccess={handleEditSuccess}/>}
     </div>
 );
 };
