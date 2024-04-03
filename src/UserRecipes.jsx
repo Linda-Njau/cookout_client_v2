@@ -1,24 +1,40 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import RecipeForm from './RecipeForm';
-import FetchUserRecipes from './FetchUserRecipes';
+import { fetchRecipes } from './httpService'
 
 const UserRecipes = () => {
     const [recipes, setRecipes ] = useState([]);
     const [editRecipe, setEditRecipe] = useState(null);
 
 
+    const fetchUserRecipes = async () => {
+        try {
+            const user_id = "1";
+            const recipesData = await fetchRecipes(user_id);
+            setRecipes(recipesData);
+        } catch (err) {
+            console.error(err);
+    }
+};
+
+    useEffect(() => {
+        fetchUserRecipes();
+}, []);
+
     const handleEditRecipe = (recipe) => {
         setEditRecipe(recipe);
     };
 
+
     const handleEditSuccess = () => {
         setEditRecipe(null);
+        fetchUserRecipes();
     }
+
 
 return (
     <div>
         <h2>User Recipes</h2>
-        <FetchUserRecipes setRecipes={setRecipes} onSuccess={handleEditSuccess} />
         <div className="recipe-list">
             {recipes.map(recipe => (
                 <div key={recipe.id} className="recipe">
@@ -34,7 +50,7 @@ return (
                 </div>
             ))}
         </div>
-        {!editRecipe && <RecipeForm onSuccess={handleEditSuccess}/>}
+        {!editRecipe && <RecipeForm onSuccess={handleEditSuccess}  />}
         {editRecipe && <RecipeForm recipe={editRecipe} setEditRecipe={setEditRecipe} onSuccess={handleEditSuccess}/>}
     </div>
 );

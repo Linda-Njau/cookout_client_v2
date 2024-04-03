@@ -23,8 +23,9 @@ const RecipeForm = ({recipe, setEditRecipe, onSuccess }) => {
             const data = recipe ? await putData(formData, recipe.id) :
                         await postData('/recipes',formData);
             console.log(data);
-            setEditRecipe(null);
+            /*onSuccess();*/
             setFormData({
+                user_id: "1",
                 title: '',
                 ingredients: '',
                 instructions: '',
@@ -33,7 +34,6 @@ const RecipeForm = ({recipe, setEditRecipe, onSuccess }) => {
                 calories: '',
                 servings: '',
                 tags: '',
-                date: '',
                 hidden: false,
             });
             onSuccess();
