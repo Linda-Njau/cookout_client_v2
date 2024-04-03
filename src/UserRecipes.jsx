@@ -26,7 +26,7 @@ const UserRecipes = () => {
     };
 
 
-    const handleEditSuccess = () => {
+    const handleFormSuccess = () => {
         setEditRecipe(null);
         fetchUserRecipes();
     }
@@ -50,8 +50,8 @@ return (
                 </div>
             ))}
         </div>
-        {!editRecipe && <RecipeForm onSuccess={handleEditSuccess}  />}
-        {editRecipe && <RecipeForm recipe={editRecipe} setEditRecipe={setEditRecipe} onSuccess={handleEditSuccess}/>}
+        {!editRecipe && <RecipeForm onSuccess={handleFormSuccess}  />}
+        {editRecipe && <RecipeForm recipe={editRecipe} setEditRecipe={setEditRecipe} onSuccess={handleFormSuccess}/>}
     </div>
 );
 };
