@@ -44,7 +44,7 @@ const Login = () => {
                 {loginError && <p>{loginError}</p>}
     
                 </label>
-                <p>No account? <Link to="/SignUp"></Link>Sign Up</p>
+                <p>No account? <Link to="/SignUp">Sign Up</Link></p>
             </form>
         </div>
     )

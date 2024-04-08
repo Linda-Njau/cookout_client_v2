@@ -4,7 +4,7 @@ import './App.css';
 import UserRecipes from './UserRecipes';
 import SearchRecipes from './SearchRecipes';
 import Login from './Login';
-
+import SignUp from './SignUp';
 
 function App() {
   const [token, setToken] = useState(localStorage.getItem('token'));
@@ -41,6 +41,7 @@ function App() {
       <Route path="/" element={<SearchRecipes />} />
       <Route path="/UserRecipes" element={<UserRecipes userId={userId}/>} />
       <Route path="/Login" element={<Login />} />
+      <Route path="/SignUp" element={<SignUp />}/>
         </Routes>
         </div>
    </div>
