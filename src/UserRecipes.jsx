@@ -49,8 +49,8 @@ return (
                 </div>
             ))}
         </div>
-        {!editRecipe && <RecipeForm onSuccess={handleFormSuccess}  />}
-        {editRecipe && <RecipeForm recipe={editRecipe} setEditRecipe={setEditRecipe} onSuccess={handleFormSuccess}/>}
+        {!editRecipe && <RecipeForm userId={userId} onSuccess={handleFormSuccess}  />}
+        {editRecipe && <RecipeForm userId={userId} recipe={editRecipe} setEditRecipe={setEditRecipe} onSuccess={handleFormSuccess}/>}
     </div>
 );
 };

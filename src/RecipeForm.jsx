@@ -3,7 +3,7 @@ import './RecipeForm.css';
 import { postData, putData } from './httpService';
 
 
-const RecipeForm = ({recipe, setEditRecipe, onSuccess }) => { 
+const RecipeForm = ({recipe, setEditRecipe, onSuccess, userId }) => { 
     const [formData, setFormData] = useState({
         title: recipe ? recipe.title : '',
         ingredients: recipe ? recipe.ingredients : '',
@@ -18,16 +18,17 @@ const RecipeForm = ({recipe, setEditRecipe, onSuccess }) => {
     });
 
     const handleSubmit = async (e) => {
+        console.log('--------userId:', userId);
         e.preventDefault();
         try {
-            const data = recipe ? await putData(formData, recipe.id) :
-                        await postData('/recipes',formData);
+                const data = recipe ? await putData(formData, recipe.id) :
+                        await postData('/recipes', {...formData, user_id: userId });
+                        
+
             console.log(data);
-            /*onSuccess();*/
             setFormData({
-                user_id: "1",
                 title: '',
-                ingredients: '',
+                ingredients: '', 
                 instructions: '',
                 preparationTime: '',
                 cookingTime: '',
