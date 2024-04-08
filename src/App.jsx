@@ -1,6 +1,7 @@
 import './App.css';
 import UserRecipes from './UserRecipes';
 import SearchRecipes from './SearchRecipes';
+import Login from './Login';
 
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
     </nav>
       <div><UserRecipes /></div>
       <div><SearchRecipes /></div>
+      <div><Login /></div>
    </div>
   )
 }
