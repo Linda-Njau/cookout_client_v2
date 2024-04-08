@@ -5,6 +5,7 @@ import UserRecipes from './UserRecipes';
 import SearchRecipes from './SearchRecipes';
 import Login from './Login';
 import SignUp from './SignUp';
+import LogoutButton from './LogoutButton';
 
 function App() {
   const [token, setToken] = useState(localStorage.getItem('token'));
@@ -35,6 +36,7 @@ function App() {
         <Link to="/Login">
         <button>Login</button>
         </Link>
+        <LogoutButton setToken={setToken} setUserId={setUserId}/>
     </nav>
     <div>
     <Routes>
