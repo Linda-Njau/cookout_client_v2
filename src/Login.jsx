@@ -25,6 +25,7 @@ const Login = () => {
         <div>
             <form>
                 <label>
+                    Username
                     <input
                         type="text"
                         value={username}
@@ -32,6 +33,7 @@ const Login = () => {
                     />
                 </label>
                 <label>
+                    password
                     <input 
                         type="password"
                         value={password}
