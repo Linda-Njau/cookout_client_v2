@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { Link , BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import './App.css';
 import UserRecipes from './UserRecipes';
@@ -6,7 +7,20 @@ import Login from './Login';
 
 
 function App() {
+  const [token, setToken] = useState(localStorage.getItem('token'));
+  const [userId, setUserId] = useState(localStorage.getItem('user_id'));
 
+  useEffect(() => {
+    const handleStorageChange = () => {
+      setToken(localStorage.getItem('token'));
+      setUserId(localStorage.getItem('user_id'));
+    };
+    window.addEventListener('storage', handleStorageChange);
+
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+    }
+  })
   return (
     <Router>
    <div id="app-container">
@@ -25,7 +39,7 @@ function App() {
     <div>
     <Routes>
       <Route path="/" element={<SearchRecipes />} />
-      <Route path="/UserRecipes" element={<UserRecipes />} />
+      <Route path="/UserRecipes" element={<UserRecipes userId={userId}/>} />
       <Route path="/Login" element={<Login />} />
         </Routes>
         </div>

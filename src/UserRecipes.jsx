@@ -2,15 +2,14 @@ import { useState, useEffect } from 'react';
 import RecipeForm from './RecipeForm';
 import { fetchRecipes } from './httpService'
 
-const UserRecipes = () => {
+const UserRecipes = ( { userId }) => {
     const [recipes, setRecipes ] = useState([]);
     const [editRecipe, setEditRecipe] = useState(null);
 
 
     const fetchUserRecipes = async () => {
         try {
-            const user_id = "1";
-            const recipesData = await fetchRecipes(user_id);
+            const recipesData = await fetchRecipes(userId);
             setRecipes(recipesData);
         } catch (err) {
             console.error(err);
@@ -19,7 +18,7 @@ const UserRecipes = () => {
 
     useEffect(() => {
         fetchUserRecipes();
-}, []);
+}, [userId]);
 
     const handleEditRecipe = (recipe) => {
         setEditRecipe(recipe);
