@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { postData } from './httpService';
 
 const Login = () => {
@@ -43,6 +44,7 @@ const Login = () => {
                 {loginError && <p>{loginError}</p>}
     
                 </label>
+                <p>No account? <Link to="/SignUp"></Link>Sign Up</p>
             </form>
         </div>
     )
