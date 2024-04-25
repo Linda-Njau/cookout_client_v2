@@ -31,7 +31,7 @@ function App() {
           <button>User Recipes</button>
         </Link>
         <Link to="/">
-          <button>Search Recipes</button>
+          <button>Home</button>
         </Link>
         <Link to="/Login">
         <button>Login</button>
@@ -40,7 +40,7 @@ function App() {
     </nav>
     <div>
     <Routes>
-      <Route path="/" element={<HomePage />}/>
+      <Route path="/" element={<HomePage userId={userId} />}/>
       <Route path="/UserRecipes" element={<UserRecipes userId={userId}/>} />
       <Route path="/Login" element={<Login />} />
       <Route path="/SignUp" element={<SignUp />}/>

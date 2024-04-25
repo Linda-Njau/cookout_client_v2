@@ -8,7 +8,12 @@ const FollowedRecipes = ({ userId }) => {
         const getFollowedRecipes = async () => {
             try {
                 const fetchedFollowedRecipes = await fetchFollowedRecipes(userId);
-                setRecipes(fetchedFollowedRecipes);
+                if (Array.isArray(fetchedFollowedRecipes)) {
+                    setRecipes(fetchedFollowedRecipes);
+                } else {
+                    console.error('Data returned from fetchFollowedRecipes is not an array:', fetchedFollowedRecipes);
+                }
+               
             } catch (error) {
                 console.error(error);
             }

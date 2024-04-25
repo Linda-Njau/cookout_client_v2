@@ -1,11 +1,13 @@
 import SearchRecipes from "./SearchRecipes";
 import FollowedRecipes from "./FollowedRecipes";
 
-const HomePage = () => {
+const HomePage = ({userId}) => {
+    return (
     <div>
       <SearchRecipes />
-      <FollowedRecipes />
+      <FollowedRecipes userId={userId} />
     </div>
+    );
   };
 
   export default HomePage;
