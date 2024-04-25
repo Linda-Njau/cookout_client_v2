@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link , BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import './App.css';
 import UserRecipes from './UserRecipes';
-import SearchRecipes from './SearchRecipes';
+import HomePage from './HomePage';
 import Login from './Login';
 import SignUp from './SignUp';
 import LogoutButton from './LogoutButton';
@@ -40,7 +40,7 @@ function App() {
     </nav>
     <div>
     <Routes>
-      <Route path="/" element={<SearchRecipes />} />
+      <Route path="/" element={<HomePage />}/>
       <Route path="/UserRecipes" element={<UserRecipes userId={userId}/>} />
       <Route path="/Login" element={<Login />} />
       <Route path="/SignUp" element={<SignUp />}/>
@@ -48,7 +48,8 @@ function App() {
         </div>
    </div>
    </Router>
-  )
+  );
 }
+
 
 export default App
