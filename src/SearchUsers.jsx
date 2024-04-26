@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { fetchUserbyUsername } from "./httpService";
+import IsFollowing from './IsFollowing';
 
-const SearchUsers = () => {
+const SearchUsers = ({ userId }) => {
     const [username, setUsername] = useState('');
     const [searchResults, setSearchResults] = useState(null);
 
@@ -27,7 +28,7 @@ return (
         {searchResults && (
             <div>
                 <p>Username: {searchResults.username}</p>
-                <p>User ID: {searchResults.id}</p>
+                <IsFollowing userId={userId} targetUserId={searchResults.id} />
             </div>
         )}
     </div>

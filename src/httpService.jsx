@@ -73,6 +73,7 @@ export const checkIsFollowing = async (userId, targetUserId) => {
 export const followUser = async (userId, data) => {
     try {
         const response = await httpClient.post(`/users/${userId}/follow`, data);
+        console.log(`following user: ${response}`)
         return response.data;       
     } catch (err) {
         throw new Error('Could not follow user', err)
@@ -82,6 +83,7 @@ export const followUser = async (userId, data) => {
 export const unfollowUser = async (userId, data) => {
     try {
         const response = await httpClient.post(`/users/${userId}/unfollow`, data);
+        console.log(`Unfollowing user: ${response}`)
         return response.data;       
     } catch (err) {
         throw new Error('Could not unfollow user', err)

@@ -1,9 +1,9 @@
 import SearchUsers from "./SearchUsers";
 
-const ExplorePage = () => {
+const ExplorePage = ({ userId }) => {
     return (
         <div>
-            <SearchUsers />
+            <SearchUsers userId={userId}/>
         </div>
     );
 };
