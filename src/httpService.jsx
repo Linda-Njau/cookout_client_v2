@@ -79,7 +79,7 @@ export const followUser = async (userId, data) => {
     }
 }
 
-export const ufollowUser = async (userId, data) => {
+export const unfollowUser = async (userId, data) => {
     try {
         const response = await httpClient.post(`/users/${userId}/unfollow`, data);
         return response.data;       
