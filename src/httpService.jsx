@@ -34,6 +34,15 @@ export const fetchRecipesbyTags = async (tags) => {
     }
 };
 
+export const fetchUserbyUsername = async (username) => {
+    try{
+        const response = await httpClient.get(`/users/${username}`);
+        return response.data;
+    } catch (err) {
+        throw new Error('Failed to fetch users', err);
+    }
+}
+
 export const fetchFollowedRecipes = async (user_id) => {
     try {
         const endpoint = `/users/${user_id}/followed_recipes`;
