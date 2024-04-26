@@ -3,6 +3,7 @@ import { Link , BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import './App.css';
 import UserRecipes from './UserRecipes';
 import HomePage from './HomePage';
+import ExplorePage from './ExplorePage';
 import Login from './Login';
 import SignUp from './SignUp';
 import LogoutButton from './LogoutButton';
@@ -33,6 +34,9 @@ function App() {
         <Link to="/">
           <button>Home</button>
         </Link>
+        <Link to="/ExplorePage">
+          <button>Explore</button>
+        </Link>
         <Link to="/Login">
         <button>Login</button>
         </Link>
@@ -41,6 +45,7 @@ function App() {
     <div>
     <Routes>
       <Route path="/" element={<HomePage userId={userId} />}/>
+      <Route path="/ExplorePage" element={<ExplorePage />}/>
       <Route path="/UserRecipes" element={<UserRecipes userId={userId}/>} />
       <Route path="/Login" element={<Login />} />
       <Route path="/SignUp" element={<SignUp />}/>
