@@ -14,6 +14,14 @@ export const postData = async (endpoint, data) => {
         console.log(err);
     }
 }
+export const putData = async (data, recipe_id) => {
+    try{
+        const response = await httpClient.put(`/recipes/${recipe_id}`, data);
+        return response.data;
+    } catch(err) {
+        throw new Error('failed to edit recipe',err);
+    }
+}
 
 export const fetchRecipes = async (user_id) => {
     try {
@@ -53,11 +61,29 @@ export const fetchFollowedRecipes = async (user_id) => {
     }
 };
 
-export const putData = async (data, recipe_id) => {
-    try{
-        const response = await httpClient.put(`/recipes/${recipe_id}`, data);
-        return response.data;
-    } catch(err) {
-        throw new Error('failed to edit recipe',err);
+export const checkIsFollowing = async (userId, targetUserId) => {
+    try {
+        const response = await httpClient.get(`/users/${userId}/is_following/${targetUserId}`)
+        return response.data       
+    } catch (err) {
+        throw new Error('Failed to check if user is following', err)
+    }
+}
+
+export const followUser = async (userId, data) => {
+    try {
+        const response = await httpClient.post(`/users/${userId}/follow`, data);
+        return response.data;       
+    } catch (err) {
+        throw new Error('Could not follow user', err)
+    }
+}
+
+export const ufollowUser = async (userId, data) => {
+    try {
+        const response = await httpClient.post(`/users/${userId}/unfollow`, data);
+        return response.data;       
+    } catch (err) {
+        throw new Error('Could not unfollow user', err)
     }
 }
