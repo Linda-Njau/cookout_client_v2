@@ -5,7 +5,7 @@ const ExplorePage = ({ userId }) => {
     return (
         <div>
             <SearchUsers userId={userId}/>
-            <ExploreRecipes/>
+            <ExploreRecipes userId={userId}/>
         </div>
     );
 };
