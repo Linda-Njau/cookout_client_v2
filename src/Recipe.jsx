@@ -1,7 +1,7 @@
 import IsFollowing from './IsFollowing';
 import FetchUsername from './FetchUsername';
 
-const RecipeDetails = ({ recipes, userId }) => {
+const Recipe = ({ recipes, userId }) => {
     return (
         <div>
             <h2>Explore Recipes</h2>
@@ -10,6 +10,9 @@ const RecipeDetails = ({ recipes, userId }) => {
                     <div key={recipe.id} className="recipe">
                         <h3>{recipe.title}</h3>
                         <p>Author: <FetchUsername userId={recipe.user_id}/></p>
+                        {userId !== recipe.user_id && (
+                            <IsFollowing userId={userId} targetUserId={recipe.user_id}/>
+                        )}
                         <p>Ingredients: {recipe.ingredients}</p>
                         <p>Instructions: {recipe.instructions}</p>
                         <p>Preparation Time: {recipe.preparation_time}</p>
@@ -17,9 +20,7 @@ const RecipeDetails = ({ recipes, userId }) => {
                         <p>Calories: {recipe.calories}</p>
                         <p>Servings: {recipe.servings}</p>
                         <p>Tags: {recipe.tags}</p>
-                        {userId !== recipe.user_id && (
-                            <IsFollowing userId={userId} targetUserId={recipe.user_id}/>
-                        )}
+                      
                     </div>
                 ))}
             </div>
@@ -27,4 +28,4 @@ const RecipeDetails = ({ recipes, userId }) => {
     );
 };
 
-export default RecipeDetails;
+export default Recipe;
