@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { fetchRecipesbyTags } from './httpService';
+import Recipe from './Recipe';
 
-const SearchRecipes = () => {
+const SearchRecipes = ( {userId} ) => {
     const [tags, setTags] = useState('');
     const [searchResults, setSearchResults] = useState([]);
 
@@ -26,21 +27,7 @@ const SearchRecipes = () => {
             <button onClick={handleSearch}>Search</button>
         <div>
             <h3>Search Results:</h3>
-            <ul>
-                {searchResults.map((recipe) => (
-
-                    <li key={recipe.id}>
-                        <h4>title: {recipe.title}</h4>
-                        <p>ingredients: {recipe.ingredients}</p>
-                    <p>Instructions: {recipe.instructions}</p>
-                    <p>Preparation time: {recipe.preparation_time}</p>
-                    <p>cooking time: {recipe.cooking_time}</p>
-                    <p>calories: {recipe.calories}</p>
-                    <p>servings: {recipe.servings}</p>
-                    <p>tags: {recipe.tags}</p>
-                    </li>
-                ))}
-            </ul>
+            <Recipe recipes={searchResults} userId={userId}/>
         </div>
         </div>
     );
