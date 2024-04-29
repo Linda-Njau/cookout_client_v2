@@ -60,6 +60,15 @@ export const fetchUserbyUsername = async (username) => {
     }
 }
 
+export const fetchUserbyId = async (userId) => {
+    try {
+        const response = await httpClient.get(`/users/${userId}`);
+        return response.data;
+    } catch (err) {
+        throw new Error('Failed to fetch user by id', err);
+    }
+}
+
 export const fetchFollowedRecipes = async (user_id) => {
     try {
         const endpoint = `/users/${user_id}/followed_recipes`;
