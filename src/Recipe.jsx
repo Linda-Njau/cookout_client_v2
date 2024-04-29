@@ -11,7 +11,7 @@ const Recipe = ({ recipes, userId }) => {
                     <div key={recipe.id} className="recipe">
                         <h3>{recipe.title}</h3>
                         <p>Author: <FetchUsername userId={recipe.user_id}/></p>
-                        {userId !== recipe.user_id && (
+                        {String(userId) !== String(recipe.user_id) && (
                             <IsFollowing userId={userId} targetUserId={recipe.user_id}/>
                         )}
                         <p>Ingredients: {recipe.ingredients}</p>
