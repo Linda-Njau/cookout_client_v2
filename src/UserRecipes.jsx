@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import RecipeForm from './RecipeForm';
 import { fetchRecipes } from './httpService'
-import Recipe from './Recipe';
 
 const UserRecipes = ( { userId }) => {
     const [recipes, setRecipes ] = useState([]);
@@ -35,8 +34,21 @@ const UserRecipes = ( { userId }) => {
 return (
     <div>
         <h2>User Recipes</h2>
-        <Recipe recipes={recipes} userId={userId}/>
-        <button onClick={() => handleEditRecipe(recipes)}>Edit</button>
+        <div className="recipe-list">
+            {recipes.map(recipe => (
+                <div key={recipe.id} className="recipe">
+                    <h3>{recipe.title}</h3>
+                    <p>Ingredients: {recipe.ingredients}</p>
+                    <p>Instructions: {recipe.instructions}</p>
+                    <p>Preparation Time: {recipe.preparation_time}</p>
+                    <p>Cooking Time: {recipe.cooking_time}</p>
+                    <p>Calories: {recipe.calories}</p>
+                    <p>Servings: {recipe.servings}</p>
+                    <p>tags: {recipe.tags}</p>
+                    <button onClick={() => handleEditRecipe(recipe)}>Edit</button>
+                </div>
+            ))}
+        </div>
         {!editRecipe && <RecipeForm userId={userId} onSuccess={handleFormSuccess}  />}
         {editRecipe && <RecipeForm userId={userId} recipe={editRecipe} setEditRecipe={setEditRecipe} onSuccess={handleFormSuccess}/>}
     </div>
