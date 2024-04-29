@@ -42,6 +42,15 @@ export const fetchRecipesbyTags = async (tags) => {
     }
 };
 
+export const fetchExploreRecipes = async () => {
+    try {
+        const response = await httpClient.get(`/recipes`);
+        return response.data;
+    } catch (err) {
+        throw new Error('Failed to fetch explore recipes', err);
+    }
+
+    }
 export const fetchUserbyUsername = async (username) => {
     try{
         const response = await httpClient.get(`/users/${username}`);
