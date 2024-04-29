@@ -6,8 +6,6 @@ const Recipe = ({ recipes, userId }) => {
         <div>
             <div className="recipe-list">
                 {recipes.map(recipe => (
-                    console.log('user_id:', userId, typeof userId),
-                    console.log('recipe.user_id:', recipe.user_id, typeof recipe.user_id),
                     <div key={recipe.id} className="recipe">
                         <h3>{recipe.title}</h3>
                         <p>Author: <FetchUsername userId={recipe.user_id}/></p>
