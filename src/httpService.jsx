@@ -7,11 +7,9 @@ const httpClient = axios.create({
 export const postData = async (endpoint, data) => {
     try {
         const response = await httpClient.post(endpoint, data);
-        console.log(response.data);
         return response.data;
-        
-    } catch (err) {
-        console.log(err);
+    } catch (error) {
+       throw error;
     }
 }
 export const putData = async (data, recipe_id) => {

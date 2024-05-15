@@ -9,7 +9,7 @@ const LogoutButton = ({setToken, setUserId}) => {
 
         setToken(null);
         setUserId(null);
-        navigate('/');
+        navigate('/SignUp');
     }
         return (
             <button onClick={handleLogout}>Logout</button>
