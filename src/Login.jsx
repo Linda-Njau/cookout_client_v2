@@ -5,6 +5,8 @@ import { postData } from './httpService';
 const Login = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [usernameError, setUsernameError] = useState('');
+    const [passwordError, setPasswordError] = useState('');
     const [loginError, setLoginError] = useState('');
 
     const handleSubmit = async (e) => {
@@ -18,7 +20,23 @@ const Login = () => {
             window.dispatchEvent(new Event('storage'));
         }
         catch (error) {
-            setLoginError('Invalid username or password. Please try again')
+            setUsernameError('');
+            setPasswordError('');
+            setLoginError('');
+
+            if (error.response?.data?.errors) {
+                const errors = error.response?.data?.errors
+                
+                if (errors.usernameError) {
+                    setUsernameError(errors.usernameError);
+                } 
+                if (errors.passwordError) {
+                    setPasswordError(errors.passwordError);
+                }
+                if (errors.loginError) {
+                    setLoginError(errors.loginError);
+                }
+            }
         }
     };
 
@@ -32,6 +50,7 @@ const Login = () => {
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
                     />
+                    {usernameError && <p className="error-message">{usernameError}</p>}
                 </label>
                 <label>
                     password
@@ -40,10 +59,10 @@ const Login = () => {
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                     />
+                    {passwordError && <p className="error-message">{passwordError}</p>}
+                    </label>
                 <button type="submit">Login</button>
-                {loginError && <p>{loginError}</p>}
-    
-                </label>
+                {loginError && <p className="error-message">{loginError}</p>}
                 <p>No account? <Link to="/SignUp">Sign Up</Link></p>
             </form>
         </div>
