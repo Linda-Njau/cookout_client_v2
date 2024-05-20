@@ -5,12 +5,8 @@ const httpClient = axios.create({
 });
 
 export const postData = async (endpoint, data) => {
-    try {
-        const response = await httpClient.post(endpoint, data);
-        return response.data;
-    } catch (error) {
-       throw error;
-    }
+    const response = await httpClient.post(endpoint, data);
+    return response.data;
 }
 export const putData = async (data, recipe_id) => {
     try{
@@ -50,12 +46,8 @@ export const fetchExploreRecipes = async () => {
 
     }
 export const fetchUserbyUsername = async (username) => {
-    try{
-        const response = await httpClient.get(`/users/${username}`);
-        return response.data;
-    } catch (err) {
-        throw err
-    }
+    const response = await httpClient.get(`/users/${username}`);
+    return response.data;
 }
 
 export const fetchUserbyId = async (userId) => {
