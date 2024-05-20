@@ -4,15 +4,25 @@ import IsFollowing from './IsFollowing';
 
 const SearchUsers = ({ userId }) => {
     const [username, setUsername] = useState('');
+    const [userError, setUserError] = useState('');
     const [searchResults, setSearchResults] = useState(null);
 
 
 const handleSearch = async () => {
     try {
+        setSearchResults(null);
+        setUserError('');
         const user = await fetchUserbyUsername(username);
         setSearchResults(user);
-    } catch (err) {
-        console.error('Error fetching user:', err);
+ 
+    } catch (error) {
+      if (error.response?.data?.errors) {
+        const errors = error.response.data.errors;
+        setUserError('');
+        if (errors.userError) {
+            setUserError(errors.userError);
+        }
+      }
     }
 };
 return (
@@ -25,6 +35,7 @@ return (
             onChange ={(e) => setUsername(e.target.value)}
         />
         <button onClick={handleSearch}>Search</button>
+        {userError && <p className="error-message">{userError}</p>}
         {searchResults && (
             <div>
                 <p>Username: {searchResults.username}</p>

@@ -1,5 +1,5 @@
 import IsFollowing from './IsFollowing';
-import FetchUsername from './FetchUsername';
+import FetchUsernamebyId from './FetchUsernamebyId';
 
 const Recipe = ({ recipes, userId }) => {
     return (
@@ -8,7 +8,7 @@ const Recipe = ({ recipes, userId }) => {
                 {recipes.map(recipe => (
                     <div key={recipe.id} className="recipe">
                         <h3>{recipe.title}</h3>
-                        <p>Author: <FetchUsername userId={recipe.user_id}/></p>
+                        <p>Author: <FetchUsernamebyId userId={recipe.user_id}/></p>
                         {String(userId) !== String(recipe.user_id) && (
                             <IsFollowing userId={userId} targetUserId={recipe.user_id}/>
                         )}

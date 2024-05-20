@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { fetchUserbyId } from './httpService';
 
-const FetchUsername = ( { userId }) => {
+const FetchUsernamebyId = ( { userId }) => {
     const [username, setUsername] = useState('');
 
 useEffect(() => {
@@ -18,4 +18,4 @@ useEffect(() => {
 
 return <span>{username}</span>
 };
-export default FetchUsername;
+export default FetchUsernamebyId;

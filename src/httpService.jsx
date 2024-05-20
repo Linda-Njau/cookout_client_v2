@@ -54,7 +54,7 @@ export const fetchUserbyUsername = async (username) => {
         const response = await httpClient.get(`/users/${username}`);
         return response.data;
     } catch (err) {
-        throw new Error('Failed to fetch users', err);
+        throw err
     }
 }
 
