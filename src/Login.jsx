@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { postData } from './httpService';
 
 const Login = () => {
@@ -8,6 +8,7 @@ const Login = () => {
     const [usernameError, setUsernameError] = useState('');
     const [passwordError, setPasswordError] = useState('');
     const [loginError, setLoginError] = useState('');
+    const navigate =useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -18,6 +19,7 @@ const Login = () => {
             localStorage.setItem('user_id', response.user_id);
 
             window.dispatchEvent(new Event('storage'));
+            navigate('/')
         }
         catch (error) {
             setUsernameError('');
