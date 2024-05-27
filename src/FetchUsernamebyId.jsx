@@ -25,5 +25,5 @@ return (
         {userError ? <span className="error-message">{userError}</span>: <span>{username}</span>}
     </div>
 );
-};
+}
 export default FetchUsername;

@@ -28,7 +28,22 @@ function App() {
    <div id="app-container">
     <nav className="navbar">
         <div className="navbar__logo"></div>
+        { token ? (
+          <>
         <Link to="/UserRecipes">
+          <button>User Recipes</button>
+        </Link>
+        <Link to="/">
+          <button>Home</button>
+        </Link>
+        <Link to="/ExplorePage">
+          <button>Explore</button>
+        </Link>
+        <LogoutButton setToken={setToken} setUserId={setUserId}/>
+        </>
+        ) : (
+          <>
+          <Link to="/UserRecipes">
           <button>User Recipes</button>
         </Link>
         <Link to="/">
@@ -40,7 +55,8 @@ function App() {
         <Link to="/Login">
         <button>Login</button>
         </Link>
-        <LogoutButton setToken={setToken} setUserId={setUserId}/>
+        </>
+        )}
     </nav>
     <div>
     <Routes>
