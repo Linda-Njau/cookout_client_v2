@@ -13,9 +13,9 @@ const RecipeForm = ({recipe, setEditRecipe, onSuccess, userId }) => {
         calories: recipe ? recipe.calories : '',
         servings: recipe ? recipe.servings : '',
         tags: recipe && Array.isArray(recipe.tags) ? recipe.tags.join(', ') : '',
-        hidden: recipe ? !recipe.hidden : false
-
+        hidden: recipe ? !recipe.hidden : false       
     });
+    const [recipeError, setRecipeError] = useState('');
 
     const handleSubmit = async (e) => {
         console.log('--------userId:', userId);
@@ -37,9 +37,18 @@ const RecipeForm = ({recipe, setEditRecipe, onSuccess, userId }) => {
                 tags: '',
                 hidden: false,
             });
+            setRecipeError('');
             onSuccess();
         } catch (error) {
-            console.error(error);
+            if(error.response?.data?.errors){
+                const errors = error.response.data.errors;
+            
+            setRecipeError('');
+            
+            if(errors.recipeError) {
+                setRecipeError(errors.recipeError);
+            }
+            }
         }
     };
 
@@ -61,7 +70,7 @@ const RecipeForm = ({recipe, setEditRecipe, onSuccess, userId }) => {
                 <form onSubmit={handleSubmit}>
                 <label>Title:</label>
                     <input type="text" name="title" value={formData.title} onChange={handleChange} />
-                    
+                    <span className="error-message">{recipeError}</span>
                     <label>Ingredients:</label>
                     <textarea name="ingredients" value={formData.ingredients} onChange={handleChange} />
                     
